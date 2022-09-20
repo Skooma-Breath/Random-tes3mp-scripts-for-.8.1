@@ -27,7 +27,12 @@ config.ViewOptionsGUI = 31368
 --Best resource I could find online was this: http://tamriel-rebuilt.org/content/resource-guide-models-morrowind (note, items that begin with TR are part of Tamriel Rebuilt, not basic Morrowind, and it certainly doesn't list all the furniture items)
 
 
+-- i've added a command for adding furniture while in game here's an example
 
+-- /af name imperial guard
+-- /af refid imperial guard
+-- /af price 666
+-- /af addfurn
 
 -- {name = "name", refId = "ref_id", price = 50},
 local furnitureData = {
