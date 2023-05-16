@@ -37,8 +37,9 @@ local itemRestockingMerchants = {
 	"fadase selvayn",
 }
 -- Item restocking for containers that are not the npc's inventory is not implemented
--- Add the uniqueIndex and table of items you want to restock in the format shown below
 -- items will only show up in the barter window for sale if its an item type the merchant deals in?
+-- they will also equip gear you put in their inventory if its better than what they are currently wearing?
+-- Add the uniqueIndex and table of items you want to restock in the format shown below
 local itemsToRestock = {
 	--meldor
 	["41720-0"] = {
