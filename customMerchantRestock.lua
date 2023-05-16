@@ -35,6 +35,7 @@ local itemRestockingMerchants = {
 	"meldor",
 	"ajira",
 	"fadase selvayn",
+	"aunius autrus",
 }
 -- Item restocking for containers that are not the npc's inventory is not implemented
 -- items will only show up in the barter window for sale if its an item type the merchant deals in?
@@ -100,6 +101,37 @@ local itemsToRestock = {
 		{
 			refId = "Misc_SoulGem_Common",
 			count =  3,
+		},
+	},
+	--aunius autrus
+	["479559-0"] = {
+		{
+			refId = "ingred_guar_hide_01",
+			count =  5,
+		},
+		{
+			refId = "ingred_scamp_skin_01",
+			count =  5,
+		},
+		{
+			refId = "ingred_ash_yam_01",
+			count =  10,
+		},
+		{
+			refId = "ingred_bloat_01",
+			count =  5,
+		},
+		{
+			refId = "ingred_netch_leather_01",
+			count =  5,
+		},
+		{
+			refId = "ingred_scrib_jerky_01",
+			count =  10,
+		},
+		{
+			refId = "ingred_gravedust_01",
+			count =  5,
 		},
 	},
 }
