@@ -6,6 +6,7 @@
 		This simple script will ensure your designated merchants always have their gold restocked.
 		Simply add the refId of the merchant you want to always restock gold into the `restockingGoldMerchants` table below.
 
+
 	INSTALLATION:
 		1) Place this file as `customMerchantRestock.lua` inside your TES3MP servers `server\scripts\custom` folder.
 		2) Open your `customScripts.lua` file in a text editor.
@@ -35,6 +36,7 @@ local itemRestockingMerchants = {
 	"meldor",
 	"ajira",
 }
+-- Item restocking for containers that are not the npc's inventory is not implemented
 -- Add the uniqueIndex and table of items you want to restock in the format shown below
 local itemsToRestock = {
 	--meldor
