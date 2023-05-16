@@ -20,7 +20,6 @@
 		1.00 (5/30/2022)		- Initial public release.
 
 		05/16/2023          - modified by skoomabreath to for item restocking
-		test
 --]]
 
 
@@ -194,6 +193,7 @@ local restockItems = function(pid, cellDescription, uniqueIndex)
 												if object.count < itr[i].count then
 														object.count = itr[i].count
 														reloadInventory = true
+														if not reloadInventory then reloadInventory = true end
 												end
 										end
 								end
@@ -203,6 +203,7 @@ local restockItems = function(pid, cellDescription, uniqueIndex)
 								if not tableHelper.containsValue(currentInventory, itr[i].refId, true) then
 										inventoryHelper.addItem(currentInventory, itr[i].refId, itr[i].count, itr[i].charge or -1, itr[i].enchantmentCharge or -1, itr[i].soul or "")
 										reloadInventory = true
+										if not reloadInventory then reloadInventory = true end
 								end
 						end
 
