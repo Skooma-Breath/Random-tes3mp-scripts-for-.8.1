@@ -6,7 +6,6 @@
 		This simple script will ensure your designated merchants always have their gold restocked.
 		Simply add the refId of the merchant you want to always restock gold into the `restockingGoldMerchants` table below.
 
-
 	INSTALLATION:
 		1) Place this file as `customMerchantRestock.lua` inside your TES3MP servers `server\scripts\custom` folder.
 		2) Open your `customScripts.lua` file in a text editor.
@@ -35,9 +34,11 @@ local restockingGoldMerchants = {
 local itemRestockingMerchants = {
 	"meldor",
 	"ajira",
+	"fadase selvayn",
 }
 -- Item restocking for containers that are not the npc's inventory is not implemented
 -- Add the uniqueIndex and table of items you want to restock in the format shown below
+-- items will only show up in the barter window for sale if its an item type the merchant deals in?
 local itemsToRestock = {
 	--meldor
 	["41720-0"] = {
@@ -191,12 +192,15 @@ customEventHooks.registerValidator("OnObjectDialogueChoice", function(eventStatu
 
 		for uniqueIndex, object in pairs(objects) do
 
-			for i,refId in pairs(restockingGoldMerchants) do
+			for _,refId in pairs(restockingGoldMerchants) do
 				if object.refId == refId then
 					if object.dialogueChoiceType == 3 then -- BARTER
 						fixGoldPool(pid, cellDescription, uniqueIndex)
 					end
 				end
+			end
+
+			for i, merchantRefid in pairs(itemRestockingMerchants) do
 				if itemRestockingMerchants[i] == object.refId then
 					if object.dialogueChoiceType == 3 then -- BARTER
 						restockItems(pid, cellDescription, uniqueIndex)
