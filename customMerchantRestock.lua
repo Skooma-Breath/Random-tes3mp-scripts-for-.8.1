@@ -192,7 +192,6 @@ local restockItems = function(pid, cellDescription, uniqueIndex)
 										if object.refId == itr[i].refId then
 												if object.count < itr[i].count then
 														object.count = itr[i].count
-														reloadInventory = true
 														if not reloadInventory then reloadInventory = true end
 												end
 										end
@@ -202,7 +201,6 @@ local restockItems = function(pid, cellDescription, uniqueIndex)
 						for i, v in pairs(itr) do
 								if not tableHelper.containsValue(currentInventory, itr[i].refId, true) then
 										inventoryHelper.addItem(currentInventory, itr[i].refId, itr[i].count, itr[i].charge or -1, itr[i].enchantmentCharge or -1, itr[i].soul or "")
-										reloadInventory = true
 										if not reloadInventory then reloadInventory = true end
 								end
 						end
