@@ -19,7 +19,7 @@
 	VERSION HISTORY:
 		1.00 (5/30/2022)		- Initial public release.
 
-		05/16/2023          - modified by skoomabreath to for item restocking
+		05/16/2023          - modified by skoomabreath for item restocking
 --]]
 
 
