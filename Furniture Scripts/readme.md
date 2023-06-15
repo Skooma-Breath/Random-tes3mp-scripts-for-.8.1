@@ -14,17 +14,17 @@ use `/fsm` to turn on furniture selection mode and then actvite or hit any objec
 
 to create a new category
 
-`/ac category`  
+```/ac category```
 
 
 to select an existing category and add a piece of furniture
 
-`/af category category` 
+```/af category category
 
-`/af name name` 
+/af name name 
 
-`/af refid refid`
+/af refid refid
 
-`/af price price`
+/af price price
 
-`/af addfurn`
+/af addfurn```
