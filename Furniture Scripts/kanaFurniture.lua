@@ -1322,62 +1322,6 @@ Methods.OnServerPostInitHandler = function()
     end
 end
 
-Methods.OnPlayerAuthentifiedHandler = function(eventStatus, pid)
-
-		if Players[pid] ~= nil and Players[pid]:IsLoggedIn() then
-				Players[pid].data.customVariables.addFurnMode = false
-				tes3mp.LogAppend(enumerations.log.INFO, "------------------------- " .. "furnSelectMode was set to false")
-		end
-
-		-- local pname = tes3mp.GetName(pid)
-
-		-- if tableHelper.containsValue(config.names, pname) then
-		-- 		if not tableHelper.containsValue(Players[pid].data.inventory, "furn_selection_tool", true) then
-		-- 				logicHandler.RunConsoleCommandOnPlayer(pid, 'player->additem "furn_selection_tool" 1', false)
-		-- 				tableHelper.print(Players[pid].data.inventory)
-		-- 		end
- 		-- end
-end
-
-Methods.OnObjectActivateValidator = function(eventStatus, pid, cellDescription, objects, targetPlayers)
-
-		if Players[pid].data.customVariables.addFurnMode == true then
-
-				MainGUI(pid)
-
-				for index, object in pairs(objects) do
-						objectRefId = object.refId
-						table.insert(Players[pid].consoleCommandsQueued, "ExplodeSpell, Shield")
-						logicHandler.RunConsoleCommandOnObject(pid, "ExplodeSpell, Shield", cellDescription, tostring(object.uniqueIndex), false)
-						logicHandler.RunConsoleCommandOnPlayer(pid, 'PlaySound, "book page2"', false)
-						return customEventHooks.makeEventStatus(false, false)
-				end
-		end
-end
-
-Methods.OnObjectHitValidator = function(eventStatus, pid, cellDescription, objects, targetPlayers)
-
---TODO do all of the stuff
-		if Players[pid].data.customVariables.addFurnMode == true and tes3mp.HasItemEquipped(pid, "furn_selection_tool") then
-
-				if tableHelper.containsValue(targetPlayers, tes3mp.GetName(pid), true) then
-						return customEventHooks.makeEventStatus(false, false)
-				end
-
-				MainGUI(pid)
-
-				for index, object in pairs(objects) do
-						objectRefId = object.refId
-						-- needed to prevent getting kicked for using console without permission (check the registered OnConsoleCommand validator in eventHandler.lua)
-						-- logichandler.RunConsoleCommandOnObject doesn't queue the command when its forEveryone argument is false)
-						table.insert(Players[pid].consoleCommandsQueued, "ExplodeSpell, Shield")
-						logicHandler.RunConsoleCommandOnObject(pid, "ExplodeSpell, Shield", cellDescription, tostring(object.uniqueIndex), false)
-						logicHandler.RunConsoleCommandOnPlayer(pid, 'PlaySound, "book page2"', false)
-						return customEventHooks.makeEventStatus(false, false)
-				end
-		end
-end
-
 Methods.furnitureData = {}
 Methods.furnitureCategories = {}
 tableHelper.merge(Methods.furnitureData, furnitureData)
