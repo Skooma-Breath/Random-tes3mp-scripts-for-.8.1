@@ -53,7 +53,6 @@ local function append_furniture(pid)
 		for cat, value in pairs(kanaFurniture.furnitureData) do
 				if tostring(category[pname]) == tostring(cat) then
 						tempObjectData[pname].refId = objectRefId[pname]
-						tes3mp.LogAppend(enumerations.log.INFO, "------------------------- " .. "value.category: " .. tostring(value.category))
 						tes3mp.MessageBox(pid, config.MessageBox, color.LimeGreen .. objectRefId[pname] .. color.Silver .. " was added to the furniture list inside the category: " .. color.LimeGreen .. category[pname] .. "\n")
 						mode[pname] = "name"
 						tes3mp.InputDialog(pid, config.InputDialog, "Enter a name.", "Enter one space to cancel.")
