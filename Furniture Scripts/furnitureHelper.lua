@@ -23,17 +23,9 @@ else
 		tes3mp.LogAppend(enumerations.log.INFO, "------------------------- " .. "furniture_crafting.json was loaded")
 end
 
--- local ballsack = {}
--- ballsack.scrotum = {refId = "dick", name = "balls", price = "9"}
--- local nut = {refId = "nut", name = "sack", price = "99"}
--- table.insert(kanaFurniture.furnitureCategories, "scrotums")
--- kanaFurniture.furnitureData.scrotums = {}
--- table.insert(kanaFurniture.furnitureData.scrotums, nut)
--- table.insert(kanaFurniture.furnitureData.scrotums, ballsack.scrotum)
--- tableHelper.print(kanaFurniture.furnitureData.scrotums)
-
 local function toggleSelectionMode(pid, cmd)
 		Players[pid].data.customVariables.furnSelectMode = not Players[pid].data.customVariables.furnSelectMode
+		tes3mp.MessageBox(pid, config.MessageBox, color.LimeGreen .. Furniture Selection Mode .. color.Silver .. " has been enabled.")
 end
 
 local function MainGUI(pid)
