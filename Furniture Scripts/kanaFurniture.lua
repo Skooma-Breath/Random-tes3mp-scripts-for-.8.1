@@ -522,19 +522,14 @@ local function addGold(pid, amount)
 end
 
 local function getFurnitureData(refId)
-	tes3mp.LogAppend(enumerations.log.INFO, "------------------------- " .. "the refId: " .. tostring(refId))
-	tes3mp.LogAppend(enumerations.log.INFO, "------------------------- " .. "furnitureData[furnitureCategories[1]]: " .. tostring(furnitureData[furnitureCategories[1]][1].name))
-
+	
 	local location
-	-- local j = 1 -- for whatever reason you can't use the iterator variable in furnitureData[furnitureCategories[i] TODO: randomly started working with the iterator variable idfk i changed nothing....
+	
 	for i = 1, #furnitureCategories, 1 do -- try this without the third parameter
 		location = tableHelper.getIndexByNestedKeyValue(furnitureData[furnitureCategories[i]], "refId", refId)
-		tes3mp.LogAppend(enumerations.log.INFO, "------------------------- " .. "location: " .. tostring(location))
 		if location then
-			tes3mp.LogAppend(enumerations.log.INFO, "------------------------- " .. "furnitureData[furnitureCategories[i][location]]: " .. tostring(furnitureData[furnitureCategories[i]][location]))
 			return furnitureData[furnitureCategories[i]][location]
 		end
-		-- j = j + 1
 	end
 	return false
 end
@@ -561,7 +556,7 @@ end
 local function getPlayerFurnitureInventory(pid)
 	local invlist = getFurnitureInventoryTable()
 	local pname = getName(pid)
-	tes3mp.LogAppend(enumerations.log.INFO, "------------------------- " .. "getPlayerFurnitureInventory invlist: " .. tostring(invlist[pname]))
+-- 	tes3mp.LogAppend(enumerations.log.INFO, "------------------------- " .. "getPlayerFurnitureInventory invlist: " .. tostring(invlist[pname]))
 	if invlist[pname] == nil then
 		invlist[pname] = {}
 		WorldInstance:Save()
@@ -952,7 +947,6 @@ end
 showInventoryOptionsGUI = function(pid, loc)
 	local message = ""
 	local choice = playerInventoryOptions[getName(pid)][loc]
-	tes3mp.LogAppend(enumerations.log.INFO, "------------------------- " .. "does this even run?")
 	local fdata = getFurnitureData(choice.refId)
 	message = message .. "Item Name: " .. choice.name .. ". Price: " .. fdata.price .. " (Sell price: " .. getSellValue(fdata.price) .. ")"
 
@@ -1003,9 +997,7 @@ end
 
 -- INVENTORY (MAIN)
 showInventoryGUI = function(pid)
-	tes3mp.LogAppend(enumerations.log.INFO, "------------------------- " .. "does this even run?")
 	local options = getSortedPlayerFurnitureInventory(pid)
-	tes3mp.LogAppend(enumerations.log.INFO, "------------------------- " .. "does this even run DID indeed run.")
 	local list = "* CLOSE *\n"
 	-- if options == nil then
 	-- 	tes3mp.ListBox(pid, config.InventoryGUI, "You haven't purchased any furniture yet.", list)
