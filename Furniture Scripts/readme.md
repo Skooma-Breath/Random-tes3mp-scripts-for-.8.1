@@ -31,7 +31,3 @@ to select an existing category and add a piece of furniture
 
 /af addfurn
 ```
-
-```diff
-- what the fuck?
-```
