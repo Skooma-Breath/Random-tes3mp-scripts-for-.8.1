@@ -48,18 +48,11 @@ local function append_furniture(pid)
 				tes3mp.LogAppend(enumerations.log.INFO, "------------------------- " .. "TOP of append_furniture. category: " .. tostring(type(category[pname])))
 				tes3mp.LogAppend(enumerations.log.INFO, "------------------------- " .. "TOP of append_furniture. value.name: " .. tostring(type(value.category)))
 				if tostring(category[pname]) == tostring(cat) then
-						-- table.insert( --TODO append the furniture refid then change the mode to name input, after entering a name change the mode to price input, etc...
-						-- table.insert(kanaFurniture.furnitureData[cat], {refId = objectRefId[pname]})
 						tempObjectData[pname].refId = objectRefId[pname]
-						tes3mp.LogAppend(enumerations.log.INFO, "------------------------- " .. "value.category: " .. tostring(value.category))
-						-- tableHelper.print(kanaFurniture.furnitureData)
-						-- jsonInterface.save("custom/furniture_crafting.json", furnitureCrafting)
-						tes3mp.MessageBox(pid, config.MessageBox, color.LimeGreen .. objectRefId[pname] .. color.Silver .. " was added to the furniture list inside the category: " .. color.LimeGreen .. category[pname] .. "\n")
-						-- tes3mp.MessageBox(pid, config.MessageBox, "object was added to the furn list.")
+						tes3mp.LogAppend(enumerations.log.INFO, "------------------------- " .. "value.category: " .. tostring(value.category))						
+						tes3mp.MessageBox(pid, config.MessageBox, color.LimeGreen .. objectRefId[pname] .. color.Silver .. " was added to the furniture list inside the category: " .. color.LimeGreen .. category[pname] .. "\n")	
 						mode[pname] = "name"
-						tes3mp.InputDialog(pid, config.InputDialog, "Enter a name.", "Enter one space to cancel.")
-						-- tableHelper.print(kanaFurniture.furnitureData)
-						-- return
+						tes3mp.InputDialog(pid, config.InputDialog, "Enter a name.", "Enter one space to cancel.")				
 				end
 		end
 end
