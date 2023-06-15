@@ -19,7 +19,8 @@ to create a new category
 
 to select an existing category and add a piece of furniture
 
-```/af category category
+```
+/af category category
 
 /af name name 
 
