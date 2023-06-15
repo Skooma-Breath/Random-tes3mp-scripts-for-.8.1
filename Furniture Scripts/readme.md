@@ -11,8 +11,10 @@ use `/fsm` to turn on furniture selection mode and then actvite or hit any objec
 
 **old commands that still work in case you need to add something that you can't select by activating or hitting. using `/fsm` is much easier**
 
-`/ac category` to create a new category 
+to create a new category
+`/ac category`  
 
+to select an existing category and add a piece of furniture
 `/af category category` 
 
 `/af name name` 
