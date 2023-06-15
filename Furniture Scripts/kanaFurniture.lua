@@ -1095,6 +1095,8 @@ local function onBuyChoice(pid, loc)
 	addFurnitureItem(getName(pid), choice.refId, 1, true)
 
 	tes3mp.MessageBox(pid, -1, "A " .. choice.name .. " has been added to your furniture inventory.")
+	
+	showMainGUI(pid)
 
 	return true
 end
