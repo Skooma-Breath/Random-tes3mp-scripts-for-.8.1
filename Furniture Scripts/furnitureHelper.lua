@@ -15,14 +15,6 @@ local objectRefId = {}
 local mode = {}
 local tempObjectData = {}
 
-if jsonInterface.load("custom/furniture_crafting.json") == nil then
-		jsonInterface.save("custom/furniture_crafting.json", furnitureCrafting)
-		tes3mp.LogAppend(enumerations.log.INFO, "------------------------- " .. "furniture_crafting.json was created")
-else
-		furnitureCrafting = jsonInterface.load("custom/furniture_crafting.json")
-		tes3mp.LogAppend(enumerations.log.INFO, "------------------------- " .. "furniture_crafting.json was loaded")
-end
-
 local function toggleSelectionMode(pid, cmd)
 		Players[pid].data.customVariables.furnSelectMode = not Players[pid].data.customVariables.furnSelectMode
 		if Players[pid].data.customVariables.furnSelectMode then
