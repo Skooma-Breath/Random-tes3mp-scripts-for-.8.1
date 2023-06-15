@@ -27,4 +27,5 @@ to select an existing category and add a piece of furniture
 
 /af price price
 
-/af addfurn```
+/af addfurn
+```
