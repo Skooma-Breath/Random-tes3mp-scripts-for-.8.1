@@ -20,3 +20,5 @@ use `/fsm` to turn on furniture selection mode and then actvite or hit any objec
 `/af refid refid`
 
 `/af price price`
+
+`/af addfurn`
