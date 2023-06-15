@@ -113,6 +113,8 @@ furnitureCatalogueScript.OnGUIAction = function(eventStatus, pid, idGui, data)
 						tempObjectData[pname].price = tonumber(data)
 						newData = tableHelper.deepCopy(tempObjectData[pname])
 						table.insert(kanaFurniture.furnitureData[category[pname]], newData)
+						tes3mp.MessageBox(pid, config.MessageBox, color.Silver .. "name: " .. color.LimeGreen .. tempObjectData[pname].name .. color.Silver .. "\nrefId: " .. color.LimeGreen ..
+						tempObjectData[pname].refId .. color.Silver .. "\nwas added to the furniture list inside the category: " .. color.LimeGreen .. category[pname] .. "\n")
 
 						kanaFurniture.mergeFurn()
 				end
