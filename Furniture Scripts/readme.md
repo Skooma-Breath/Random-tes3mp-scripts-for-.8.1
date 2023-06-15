@@ -10,6 +10,7 @@ use `/fsm` to turn on furniture selection mode and then actvite or hit any objec
 `/furn` will bring up the furniture menu for purchasing and using furniture.
 
 **old commands that still work in case you need to add something that you can't select by activating or hitting. using `/fsm` is much easier**
+
 `/ac category` to create a new category 
 
 `/af category category` 
