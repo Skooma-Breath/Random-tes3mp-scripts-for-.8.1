@@ -6,8 +6,8 @@ config.MainGui = 69420
 config.categoryList = 69421
 config.MessageBox = 69422
 config.InputDialog = 69423
-config.nameRequiredCommands = {"fsm", "furnselectmode", "cs"}
-config.names = {"test1", "test2", "test3", "test4", "cyborg"}
+config.nameRequiredCommands = {"fsm", "furnselectmode"}
+config.names = {"droid"}
 config.rankRequired = 0
 
 local category = {}
