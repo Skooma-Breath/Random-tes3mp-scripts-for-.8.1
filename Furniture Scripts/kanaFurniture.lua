@@ -24,7 +24,7 @@ config.ViewGUI = 31366
 config.InventoryOptionsGUI = 31367
 config.ViewOptionsGUI = 31368
 config.BuyCategoryGUI = 31369
-config.InvalidCategoryMsg = "Invalid category type /cat for the list of valid categories."
+config.InvalidCategoryMsg = "Invalid category or you didn't enter one."
 
 config.MainGui = 69420
 config.categoryList = 69421
@@ -522,14 +522,19 @@ local function addGold(pid, amount)
 end
 
 local function getFurnitureData(refId)
-	
+	tes3mp.LogAppend(enumerations.log.INFO, "------------------------- " .. "the refId: " .. tostring(refId))
+	tes3mp.LogAppend(enumerations.log.INFO, "------------------------- " .. "furnitureData[furnitureCategories[1]]: " .. tostring(furnitureData[furnitureCategories[1]][1].name))
+
 	local location
-	
+	-- local j = 1 -- for whatever reason you can't use the iterator variable in furnitureData[furnitureCategories[i] TODO: randomly started working with the iterator variable idfk i changed nothing....
 	for i = 1, #furnitureCategories, 1 do -- try this without the third parameter
 		location = tableHelper.getIndexByNestedKeyValue(furnitureData[furnitureCategories[i]], "refId", refId)
+		tes3mp.LogAppend(enumerations.log.INFO, "------------------------- " .. "location: " .. tostring(location))
 		if location then
+			tes3mp.LogAppend(enumerations.log.INFO, "------------------------- " .. "furnitureData[furnitureCategories[i][location]]: " .. tostring(furnitureData[furnitureCategories[i]][location]))
 			return furnitureData[furnitureCategories[i]][location]
 		end
+		-- j = j + 1
 	end
 	return false
 end
@@ -556,7 +561,7 @@ end
 local function getPlayerFurnitureInventory(pid)
 	local invlist = getFurnitureInventoryTable()
 	local pname = getName(pid)
--- 	tes3mp.LogAppend(enumerations.log.INFO, "------------------------- " .. "getPlayerFurnitureInventory invlist: " .. tostring(invlist[pname]))
+	tes3mp.LogAppend(enumerations.log.INFO, "------------------------- " .. "getPlayerFurnitureInventory invlist: " .. tostring(invlist[pname]))
 	if invlist[pname] == nil then
 		invlist[pname] = {}
 		WorldInstance:Save()
@@ -569,15 +574,12 @@ local function getSortedPlayerFurnitureInventory(pid)
 	local inv = getPlayerFurnitureInventory(pid)
 	local sorted = {}
 	for refId, amount in pairs(inv) do
-		local name = getFurnitureData(refId).name -- getting stuck here, attempt to index nil value
+		local name = getFurnitureData(refId).name
 		table.insert(sorted, {name = name, count = amount, refId = refId})
 	end
 	if sorted ~= nil then
-		-- tes3mp.LogAppend(enumerations.log.INFO, "------------------------- " .. "sorted" .. tostring(sorted))
+		table.sort(sorted, function(a,b) return a.name < b.name end)
 		return sorted
-	else
-		-- tes3mp.LogAppend(enumerations.log.INFO, "------------------------- " .. "sorted was not nil")
-		return
 	end
 end
 
@@ -1047,7 +1049,7 @@ local function buyItem(pid, loc)
 	-- table.sort(options, function(a,b) return a.name < b.name end)
 	for _, furnCat in ipairs(furnitureCategories) do
 		if choice == furnCat then
-			tes3mp.LogAppend(enumerations.log.INFO, "------------------------- " .. "key: " .. _ .. "Value: " .. tostring(furnCat))
+			-- tes3mp.LogAppend(enumerations.log.INFO, "------------------------- " .. "key: " .. _ .. "Value: " .. tostring(furnCat))
 			category = choice
 			playerCategoryChoice = choice
 		end
@@ -1055,11 +1057,22 @@ local function buyItem(pid, loc)
 
 	playerBuyOptions[getName(pid)] = {}
 
+	--TODO figure out how to sort the displayed things to buy by name (alphabetically)
+
+	-- local sortedNameList = {}
+	local sortableList = {}
 	for key, value in ipairs(options[category]) do
-		tes3mp.LogAppend(enumerations.log.INFO, "------------------------- " .. tostring(key) .. tostring(value))
+			tes3mp.LogAppend(enumerations.log.INFO, "------------------------- " .. tostring(key) .. tostring(value.name))
+			table.insert(sortableList, {name = value.name, refId = value.refId, price = value.price})
+	end
+
+	table.sort(sortableList, function(a,b) return a.name < b.name end)
+
+	for key, value in ipairs(sortableList) do
+		tes3mp.LogAppend(enumerations.log.INFO, "------------------------- " .. tostring(key) .. tostring(value.name))
 		local i  = 1
 		table.insert(playerBuyOptions[getName(pid)], value)
-		tes3mp.LogAppend(enumerations.log.INFO, "------------------------- " .. tostring(playerBuyOptions[getName(pid)]))
+		-- tes3mp.LogAppend(enumerations.log.INFO, "------------------------- " .. tostring(playerBuyOptions[getName(pid)]))
 		list = list .. value.name .. " (" .. value.price .. " Gold)"
 		if not(i == #options[category]) then
 			list = list .. "\n"
@@ -1087,9 +1100,7 @@ local function onBuyChoice(pid, loc)
 	addFurnitureItem(getName(pid), choice.refId, 1, true)
 
 	tes3mp.MessageBox(pid, -1, "A " .. choice.name .. " has been added to your furniture inventory.")
-	
 	showMainGUI(pid)
-
 	return true
 end
 
