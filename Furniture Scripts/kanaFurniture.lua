@@ -340,9 +340,7 @@ createCatJson()
 
 
 
-------------
-tableHelper = require("tableHelper")
-
+--------------------------------------------------------------------------------------------------------------------
 --Forward declarations:
 local showMainGUI, showBuyGUI, showInventoryGUI, showViewGUI, showInventoryOptionsGUI, showViewOptionsGUI
 ------------
