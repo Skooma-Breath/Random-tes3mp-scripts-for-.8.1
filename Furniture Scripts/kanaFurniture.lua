@@ -341,8 +341,6 @@ createCatJson()
 
 
 ------------
-decorateHelp = require("custom.decorateHelp")
--- decorateHelp = require("custom.rickoffs_decorate")
 tableHelper = require("tableHelper")
 
 --Forward declarations:
