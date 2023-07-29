@@ -339,8 +339,7 @@ createCatJson()
 
 
 
-
---------------------------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------------------
 --Forward declarations:
 local showMainGUI, showBuyGUI, showInventoryGUI, showViewGUI, showInventoryOptionsGUI, showViewOptionsGUI
 ------------
@@ -992,14 +991,16 @@ showBuyGUI = function(pid)
 	tes3mp.ListBox(pid, config.BuyCategoryGUI, "Select a Category", list)
 end
 
+local temp_buy_list
+
 local function buyItem(pid, loc)
 	local choice = playerBuyOptions[getName(pid)][loc]
 	-- local options = getAvailableFurnitureStock(pid)
 	local options = furnitureData
-	local list = "* CLOSE *\n"
 	local category
+	temp_buy_list = "* CLOSE *\n"
 
-	
+
 	for _, furnCat in ipairs(furnitureCategories) do
 		if choice == furnCat then
 			category = choice
@@ -1019,14 +1020,14 @@ local function buyItem(pid, loc)
 	for key, value in ipairs(sortableList) do
 		local i  = 1
 		table.insert(playerBuyOptions[getName(pid)], value)
-		list = list .. value.name .. " (" .. value.price .. " Gold)"
+		temp_buy_list = temp_buy_list .. value.name .. " (" .. value.price .. " Gold)"
 		if not(i == #options[category]) then
-			list = list .. "\n"
+			temp_buy_list = temp_buy_list .. "\n"
 		end
 		i = i + 1
 	end
 
-	tes3mp.ListBox(pid, config.BuyGUI, "Select an item you wish to buy", list)
+	tes3mp.ListBox(pid, config.BuyGUI, "Select an item you wish to buy", temp_buy_list)
 end
 
 local function onBuyChoice(pid, loc)
@@ -1045,7 +1046,8 @@ local function onBuyChoice(pid, loc)
 	addFurnitureItem(getName(pid), choice.refId, 1, true)
 
 	tes3mp.MessageBox(pid, -1, "A " .. choice.name .. " has been added to your furniture inventory.")
-	showMainGUI(pid)
+	-- showMainGUI(pid)
+	tes3mp.ListBox(pid, config.BuyGUI, "Select an item you wish to buy", temp_buy_list)
 	return true
 end
 
@@ -1068,6 +1070,7 @@ local function onMainView(pid)
 end
 
 -- GENERAL
+--TODO figure out how to return to the buy menu where you left off after you buy an item. possibly need to save the category choice (data from OnGUIAction) in a temp variable and pass it along....
 Methods.OnGUIAction = function(pid, idGui, data)
 
 	if idGui == config.MainGUI then -- Main
@@ -1151,7 +1154,7 @@ Methods.OnCommand = function(pid)
 	showMainGUI(pid)
 end
 
-local temp = {} 
+local temp = {}
 local category
 -- make this better....
 Methods.append_object = function(pid, cmd) --TODO add a command for removing/rm furniture items
