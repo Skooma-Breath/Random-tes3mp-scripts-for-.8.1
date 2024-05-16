@@ -79,6 +79,14 @@ local function undo(pid, cmd)
 				return
 		end
 
+		if not logicHandler.IsCellLoaded(undo_last_hit[pname][#undo_last_hit[pname]].cell) then
+
+				tes3mp.MessageBox(pid, config.MessageBox, color.LimeGreen .. "That cell containing that object is not currently loaded.")
+
+				return
+
+		end
+
 		tes3mp.ClearObjectList()
     tes3mp.SetObjectListPid(pid)
     tes3mp.SetObjectListCell(undo_last_hit[pname][#undo_last_hit[pname]].cell)
@@ -88,7 +96,8 @@ local function undo(pid, cmd)
     tes3mp.AddObject()
     tes3mp.SendObjectState(true, false)
 
-		local uniqueIndex = undo_last_hit[pname][#undo_last_hit[pname]].refNum .. "-" .. undo_last_hit[pname][#undo_last_hit[pname]].mpNum
+		-- local uniqueIndex = undo_last_hit[pname][#undo_last_hit[pname]].refNum .. "-" .. undo_last_hit[pname][#undo_last_hit[pname]].mpNum
+		local uniqueIndex = undo_last_hit[pname][#undo_last_hit[pname]].index
 
 		local objectStatesToSave = {}
 		objectStatesToSave[uniqueIndex] = {refId = undo_last_hit[pname][#undo_last_hit[pname]].refId, state = true}
@@ -98,6 +107,10 @@ local function undo(pid, cmd)
 		table.remove(undo_last_hit[pname])
 end
 
+---------------------------------------
+--TODO
+-- make it so server created objects get deleted but client obects do not.
+-----------------------------------------
 local function flush_turds(pid, cmd)
 
 		local pname = tes3mp.GetName(pid)
@@ -109,13 +122,20 @@ local function flush_turds(pid, cmd)
 				return
 		end
 
+		local cell = LoadedCells[undo_last_hit[pname][#undo_last_hit[pname]].cell]
+
 		for i, object in pairs(undo_last_hit[pname]) do
 				logicHandler.DeleteObjectForEveryone(object.cell, object.index)
+				cell:InitializeObjectData(object.index, object.refId)
 		end
+
+		-- tableHelper.cleanNils(cell.data.objectData)
 
 		undo_last_hit[pname] = {}
 
 		tes3mp.MessageBox(pid, config.MessageBox, color.Red .. "The turds have been flushed.")
+
+		-- cell:SaveToDrive()
 
 end
 
