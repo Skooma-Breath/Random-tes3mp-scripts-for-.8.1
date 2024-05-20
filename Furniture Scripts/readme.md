@@ -1,10 +1,10 @@
+**You need a decorate script installed for this to not crash when placing furniture**
+
 in `customScripts.lua` add 
 ```lua
 kanaFurniture = require("custom.kanaFurniture")
 require("custom.furnitureHelper")
 ```
-
-**You need a decorate script installed for this to not crash when placing furniture**
 
 place both files in `server/scripts/custom`
 
