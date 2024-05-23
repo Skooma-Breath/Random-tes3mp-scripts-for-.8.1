@@ -9,7 +9,7 @@ require("custom.furnitureHelper")
 
 place files in `server/scripts/custom`
 
-to spawn with the furniture tool put your name inside `config.names` at the top of furnitureHelper or to spawn it use `player->additem furn_selection_tool 1` in console  or in chat `placeat pid furn_selection_tool
+to spawn with the furniture tool put your name inside `config.names` at the top of furnitureHelper or to just spawn one use `player->additem furn_selection_tool 1` in console  or in chat `placeat pid furn_selection_tool`
 
 `/dh` to open decorate menu.
 
