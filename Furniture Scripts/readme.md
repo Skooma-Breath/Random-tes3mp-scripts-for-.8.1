@@ -9,6 +9,8 @@ require("custom.furnitureHelper")
 
 place files in `server/scripts/custom`
 
+to spawn with the furniture tool put your name inside `config.names` at the top of furnitureHelper or to spawn it use `player->additem furn_selection_tool 1` in console  or in chat `placeat pid furn_selection_tool
+
 `/dh` to open decorate menu.
 
 use `/fsm` to turn on furniture selection mode and then actvite or hit any object with the furniture selection tool (looks like stendars hammer) which will be added to your inventory automatically on login if you are an admin/name required player.
