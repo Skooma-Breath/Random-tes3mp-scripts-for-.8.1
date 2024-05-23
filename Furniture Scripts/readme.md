@@ -2,7 +2,7 @@
 
 in `customScripts.lua` add 
 ```lua
-decorateHelp = reqire("custom.decorateHelp")
+decorateHelp = require("custom.decorateHelp")
 kanaFurniture = require("custom.kanaFurniture")
 kanaHousing = require("custom.kanaHousing")
 require("custom.furnitureHelper")
