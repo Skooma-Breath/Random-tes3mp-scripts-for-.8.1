@@ -7003,6 +7003,8 @@ local restockItems = function(pid, cellDescription, uniqueIndex)
 												if object.count < itr[i].count then
 														object.count = itr[i].count
 														if not reloadInventory then reloadInventory = true end
+												else
+														itr[i].count = object.count
 												end
 										end
 								end
