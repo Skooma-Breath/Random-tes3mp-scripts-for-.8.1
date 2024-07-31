@@ -71,7 +71,8 @@ end
 local function setSelectedObject(pid, refIndex)
 	playerSelectedObject[GetName(pid)] = refIndex
 	-- if tableHelper.containsValue(LoadedCells[tes3mp.GetCell()].data.objectData[refIndex], refIndex)
-	if LoadedCells[tes3mp.GetCell(pid)].data.objectData[refIndex].scale == nil then
+	tes3mp.LogAppend(enumerations.log.INFO, "------------------------- " .. "refIndex: " .. tostring(refIndex))
+	if LoadedCells[tes3mp.GetCell(pid)] and LoadedCells[tes3mp.GetCell(pid)].data.objectData[refIndex].scale == nil then
 			LoadedCells[tes3mp.GetCell(pid)].data.objectData[refIndex].scale = 1
 	end
 end
