@@ -6384,30 +6384,6 @@ local itemsToRestock = {
     },
     ["25693-0"] = { -- elbert nermarc
         {
-            refId = "l_m_enchantitem_redoran_rank8",
-            count = 5,
-        },
-        {
-            refId = "l_m_enchantitem_hlaalu_rank6",
-            count = 5,
-        },
-        {
-            refId = "l_m_enchantitem_telvanni_rank8",
-            count = 5,
-        },
-        {
-            refId = "l_m_enchantitem_temple_rank8_1",
-            count = 2,
-        },
-        {
-            refId = "l_m_enchantitem_temple_rank8_2",
-            count = 2,
-        },
-        {
-            refId = "random_scroll_all",
-            count = 15,
-        },
-        {
             refId = "Misc_SoulGem_Grand",
             count = 5,
         },
