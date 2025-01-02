@@ -69,12 +69,17 @@ local function GetName(pid)
 end
 
 local function setSelectedObject(pid, refIndex)
-	playerSelectedObject[GetName(pid)] = refIndex
-	-- if tableHelper.containsValue(LoadedCells[tes3mp.GetCell()].data.objectData[refIndex], refIndex)
-	tes3mp.LogAppend(enumerations.log.INFO, "------------------------- " .. "refIndex: " .. tostring(refIndex))
-	if LoadedCells[tes3mp.GetCell(pid)] and LoadedCells[tes3mp.GetCell(pid)].data.objectData[refIndex].scale == nil then
-			LoadedCells[tes3mp.GetCell(pid)].data.objectData[refIndex].scale = 1
-	end
+    playerSelectedObject[GetName(pid)] = refIndex
+    tes3mp.LogAppend(enumerations.log.INFO, "------------------------- " .. "refIndex: " .. tostring(refIndex))
+    local cell = tes3mp.GetCell(pid)
+    if LoadedCells[cell] and LoadedCells[cell].data and LoadedCells[cell].data.objectData and LoadedCells[cell].data.objectData[refIndex] then
+        if LoadedCells[cell].data.objectData[refIndex].scale == nil then
+            LoadedCells[cell].data.objectData[refIndex].scale = 1
+            tes3mp.LogMessage(enumerations.log.INFO, "Set default scale for refIndex: " .. tostring(refIndex))
+        end
+    else
+        tes3mp.LogMessage(enumerations.log.ERROR, "Failed to set scale for refIndex: " .. tostring(refIndex) .. ". Missing data.")
+    end
 end
 
 local function GetObject(refIndex, cell)
